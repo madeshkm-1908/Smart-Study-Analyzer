@@ -1,29 +1,14 @@
-FROM openjdk:8-jdk-alphine
+FROM openjdk:8-jdk-alpine
 
 WORKDIR /app
 
-# Copy all files
+# Copy all files (including lib folder with JARs)
 COPY . .
 
-# Install required packages for JSP compilation
-RUN apt-get update && apt-get install -y \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Download Tomcat dependencies (or you can include them in lib folder)
-RUN mkdir -p /tmp/tomcat-libs && \
-    cd /tmp/tomcat-libs && \
-    curl -L -o tomcat-embed-core-9.0.82.jar https://repo1.maven.org/maven2/org/apache/tomcat/embed/tomcat-embed-core/9.0.82/tomcat-embed-core-9.0.82.jar && \
-    curl -L -o tomcat-embed-jasper-9.0.82.jar https://repo1.maven.org/maven2/org/apache/tomcat/embed/tomcat-embed-jasper/9.0.82/tomcat-embed-jasper-9.0.82.jar && \
-    curl -L -o tomcat-embed-el-9.0.82.jar https://repo1.maven.org/maven2/org/apache/tomcat/embed/tomcat-embed-el/9.0.82/tomcat-embed-el-9.0.82.jar && \
-    curl -L -o ecj-3.33.0.jar https://repo1.maven.org/maven2/org/eclipse/jdt/ecj/3.33.0/ecj-3.33.0.jar && \
-    curl -L -o mysql-connector-java-8.0.33.jar https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.33/mysql-connector-java-8.0.33.jar && \
-    cp *.jar /app/lib/
-
-# Compile Main.java
+# Compile Main.java using the lib folder
 RUN javac -cp "lib/*" Main.java
 
-# Create JAR
+# Create JAR file
 RUN jar cvfm study-analyzer.jar MANIFEST.MF *.jsp WEB-INF Main.class
 
 EXPOSE 8080
