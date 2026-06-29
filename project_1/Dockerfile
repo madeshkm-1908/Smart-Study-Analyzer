@@ -5,16 +5,13 @@ WORKDIR /app
 # Copy all files
 COPY . .
 
-# Compile Main.java (compilation works)
+# Compile Main.java
 RUN javac -cp "lib/*" Main.java
 
-# Create JAR (with manifest)
+# Create JAR file (without trying to copy lib again)
 RUN jar cvfm study-analyzer.jar MANIFEST.MF *.jsp WEB-INF Main.class
-
-# Copy lib folder into the JAR's location
-RUN cp -r lib /app/lib
 
 EXPOSE 8080
 
-# Run with classpath including lib folder
+# Run with classpath pointing to lib folder
 CMD ["java", "-cp", "study-analyzer.jar:lib/*", "Main"]
