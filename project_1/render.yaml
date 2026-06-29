@@ -1,10 +1,15 @@
 services:
   - type: web
     name: study-analyzer
-    env: docker
+    env: java
     region: oregon
     plan: free
-    dockerfilePath: ./Dockerfile
+    rootDir: project_1
+    buildCommand: |
+      javac -cp "lib/*" Main.java
+      jar cvfm study-analyzer.jar MANIFEST.MF *.jsp WEB-INF Main.class
+    startCommand: |
+      java -cp "study-analyzer.jar:lib/*" Main
     healthCheckPath: /login.jsp
     envVars:
       - key: DB_HOST
@@ -16,4 +21,4 @@ services:
       - key: DB_USER
         value: avnadmin
       - key: DB_PASSWORD
-        value: CHANGE_ME_IN_RENDER
+        sync: false
