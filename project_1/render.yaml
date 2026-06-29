@@ -1,15 +1,11 @@
 services:
   - type: web
     name: study-analyzer
-    env: java
+    env: docker
     region: oregon
     plan: free
     rootDir: project_1
-    buildCommand: |
-      javac -cp "lib/*" Main.java
-      jar cvfm study-analyzer.jar MANIFEST.MF *.jsp WEB-INF Main.class
-    startCommand: |
-      java -cp "study-analyzer.jar:lib/*" Main
+    dockerfilePath: ./Dockerfile
     healthCheckPath: /login.jsp
     envVars:
       - key: DB_HOST
