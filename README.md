@@ -3,7 +3,7 @@
 A web application to track your study progress across multiple subjects.
 
 ## Live Demo
-👉 **[Click here to use the app](https://study-analyzer.onrender.com/login.jsp)**
+👉 **[Click here to use the app]([https://study-analyzer.onrender.com/login.jsp](https://smart-study-analyzer-7tl3.onrender.com))**
 
 ## Features
 - Subject Progress Tracking
