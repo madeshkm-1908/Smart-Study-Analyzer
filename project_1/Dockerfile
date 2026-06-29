@@ -9,8 +9,8 @@ RUN mkdir -p /usr/local/tomcat/webapps/ROOT
 # Copy ALL files from project_1 to ROOT
 COPY . /usr/local/tomcat/webapps/ROOT/
 
-# Copy MySQL connector from your lib folder (THIS WORKS)
-COPY lib/mysql-connector-java-*.jar /usr/local/tomcat/lib/
+# Copy ALL JAR files to Tomcat's lib (includes MySQL driver of any version)
+COPY lib/*.jar /usr/local/tomcat/lib/
 
 EXPOSE 8080
 
