@@ -3,16 +3,14 @@ import java.io.File;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // Create Tomcat instance
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(8080);
         
-        // Set base directory
         String baseDir = new File(".").getAbsolutePath();
         tomcat.setBaseDir(baseDir);
         
-        // Add webapp (pointing to current directory)
-        tomcat.addWebapp("/", baseDir);
+        // Fix: Use empty string for root context
+        tomcat.addWebapp("", baseDir);
         
         // Start server
         tomcat.start();
