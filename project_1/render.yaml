@@ -5,3 +5,15 @@ services:
     region: oregon
     plan: free
     dockerfilePath: ./Dockerfile
+    healthCheckPath: /login.jsp
+    envVars:
+      - key: DB_HOST
+        value: mysql-34b54408-student-9a28.1.aivencloud.com
+      - key: DB_PORT
+        value: 27417
+      - key: DB_NAME
+        value: defaultdb
+      - key: DB_USER
+        value: avnadmin
+      - key: DB_PASSWORD
+        value: CHANGE_ME_IN_RENDER
